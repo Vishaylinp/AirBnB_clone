@@ -23,5 +23,6 @@ class HBNBCommand(cmd.Cmd):
         """print newline after console exit"""
         print()
 
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
