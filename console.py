@@ -19,5 +19,9 @@ class HBNBCommand(cmd.Cmd):
         """Does nothing when given a empty line"""
         pass
 
+    def postloop(self):
+        """print newline after console exit"""
+        print()
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
