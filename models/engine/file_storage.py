@@ -5,6 +5,7 @@
 import json
 import os.path
 
+
 class FileStorage():
     """serialize instance to JSON file and
        deserialize to instances from file
@@ -32,7 +33,7 @@ class FileStorage():
         """serializes dictionary containing instance dictionary
            representations to JSOn file"""
 
-        with open (self.__file_path, "w") as json_file:
+        with open(self.__file_path, "w") as json_file:
             json.dump(self.__objects, json_file)
 
     def reload(self):
