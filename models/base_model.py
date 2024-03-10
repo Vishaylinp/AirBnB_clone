@@ -34,10 +34,11 @@ class BaseModel():
         """returns a dictionary containing all
            keys/values of __dict__ of the instance
         """
-        self.__dict__["__class__"] = str(self.__class__.__name__)
-        self.created_at = datetime.isoformat(self.created_at)
-        self.updated_at = datetime.isoformat(self.updated_at)
-        return self.__dict__
+        dict_cpy = self.__dict__.copy()
+        dict_cpy["created_at"] = self.created_at.isoformat()
+        dict_cpy["updated_at"] = self.updated_at.isoformat()
+        dict_cpy["__class__"] = self.__class__.__name__
+        return dict_cpy
 
     def __str__(self):
         """print the class name, id and dictionary"""
