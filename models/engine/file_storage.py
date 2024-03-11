@@ -4,6 +4,7 @@
 """
 import json
 import os.path
+import datetime
 
 
 class FileStorage():
@@ -20,28 +21,34 @@ class FileStorage():
         return FileStorage.__objects
 
     def new(self, obj):
-        """sets in dictionary a object representation of instance
+        """sets in dictionary a object
            wih key
 
            Args:
                obj (class instance): to store inside dictionary
         """
         key = str(obj.__class__.__name__) + "." + str(obj.id)
-        FileStorage.__objects.update({key: obj.to_dict()})
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """serializes dictionary containing instance dictionary
            representations to JSOn file"""
-
+        obj_cpy = FileStorage.__objects
+        obj_dict = {obj_id: obj_cpy[obj_id].to_dict() for obj_id in obj_cpy.keys()}
         with open(FileStorage.__file_path, "w", encoding="utf-8") as json_file:
-            json.dump(FileStorage.__objects, json_file)
+            json.dump(obj_dict, json_file)
 
     def reload(self):
         """deserializes the JSON file to dictionary containing
            instance dictionary representations
         """
-        if os.path.exists(FileStorage.__file_path):
+        from models.base_model import BaseModel
+        try:
             with open(FileStorage.__file_path, 'r', encoding="utf-8") as json_file:
-                FileStorage.__objects = json.load(json_file)
-        else:
+                obj_dict = json.load(json_file)
+                for d in obj_dict.values():
+                    class_name = d["__class__"]
+                    del d["__class__"]
+                    self.new(eval(class_name)(**d))
+        except FileNotFoundError:
             return
