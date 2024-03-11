@@ -9,11 +9,12 @@ from models import storage
 class BaseModel():
     """the base class for all other classes"""
     def __init__(self, *args, **kwargs):
-        """instantiation of object
+        """instantiation of object directly or from a dictionary
+           representation given through argument kwargs
 
            Args:
-            *args (any): Unused.
-            **kwargs (dict): Key/value of attributes.
+               *args (any): Unused.
+               **kwargs (dict): Key/value of attributes.
         """
         if len(kwargs) == 0:
             self.id = str(uuid.uuid4())
@@ -24,8 +25,10 @@ class BaseModel():
             for key, value in kwargs.items():
                 if key == "__class__":
                     continue
-                elif (key == "created_at" or key == "updated_at"):
-                    setattr(self, key, datetime.fromisoformat(value))
+                elif key in ("created_at", "updated_at"):
+                    datetime_format = datetime.strptime(value,
+                                                        "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, datetime_format)
                 else:
                     setattr(self, key, value)
 
