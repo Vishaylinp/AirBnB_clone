@@ -4,7 +4,7 @@ from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    """Manages user objects"""
+    """Manages Places objects"""
     city_id = ""
     user_id = ""
     name = ""
