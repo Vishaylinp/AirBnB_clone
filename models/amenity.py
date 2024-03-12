@@ -1,9 +1,8 @@
 #!/usr/bin/python3
-"""Create Amenity class"""
+"""Create user class"""
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """class that will manage amenity instances"""
-
+    """Manages user objects"""
     name = ""
