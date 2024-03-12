@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""Create user class"""
+"""Create City class"""
 from models.base_model import BaseModel
 
 
-class city(BaseModel):
-    """Manages user objects"""
+class City(BaseModel):
+    """"class that will manage City instances"""
+
     state_id = ""
     name = ""
