@@ -4,7 +4,7 @@ from models.base_model import BaseModel
 
 
 class Review(BaseModel):
-    """"class that will manage Review instances"""
+    """Manages user objects"""
     place_id = ""
     user_id = ""
     text = ""

@@ -3,7 +3,6 @@
 from models.base_model import BaseModel
 
 
-class State(BaseModel):
-    """class that manage state instances"""
-
+class state(BaseModel):
+    """Manages user objects"""
     name = ""
