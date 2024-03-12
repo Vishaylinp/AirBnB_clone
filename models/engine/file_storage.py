@@ -41,7 +41,7 @@ class FileStorage():
            instance dictionary representations
         """
         if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r', encoding="utf-8") as json_file:
-                FileStorage.__objects = json.load(json_file)
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as jfile:
+                FileStorage.__objects = json.load(jfile)
         else:
             return
